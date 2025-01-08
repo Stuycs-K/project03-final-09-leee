@@ -32,3 +32,6 @@ Part 3 should be done by Friday, 1/17
     - catching signals such as SIGINT for instructions
 
 This should leave me with time to complete any late labs and account for any additional time it might take for me to finish a section.
+
+
+Notes: Ensure I can execvp a mp3 file first and then piece it together. mpg123 was installed on all lab computers. 
