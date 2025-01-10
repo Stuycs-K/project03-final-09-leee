@@ -40,7 +40,7 @@ int compare(struct song_node * a, struct song_node * b){
   return strcmp(s1, s2);
 }
 
-struct song_node * insert_song_node(char* artist, char* title, struct song_node *first){
+struct song_node * insert_song_node(char* artist, char* title, struct song_node *first, int file){
   struct song_node *song;
   song = malloc(sizeof(struct song_node)*1);
   strcpy(song->artist, artist);

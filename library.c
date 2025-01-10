@@ -14,14 +14,14 @@ struct song_node ** init(){
   return library;
 }
 
-void add(struct song_node ** library, char* artist, char* title){
+void add(struct song_node ** library, char* artist, char* title, int file){
   char letter = artist[0];
   if(letter > 96 && letter < 123){
-    library[letter - 'a' + 1] = insert_song_node(artist, title, library[letter - 'a' + 1]);
+    library[letter - 'a' + 1] = insert_song_node(artist, title, library[letter - 'a' + 1], file);
   } else if(letter > 64 && letter < 91){
-    library[letter - 'A' + 1] = insert_song_node(artist, title, library[letter - 'A' + 1]);
+    library[letter - 'A' + 1] = insert_song_node(artist, title, library[letter - 'A' + 1], file);
   } else {
-    library[0] = insert_song_node(artist, title, library[0]);
+    library[0] = insert_song_node(artist, title, library[0], file);
   }
 }
 
@@ -130,7 +130,7 @@ struct song_node * libraryFinder(struct song_node** library, int n){
     while(place != NULL){
       if(n == current){
         return place;
-      }      
+      }
       place = place->next;
       current++;
     }
@@ -141,7 +141,7 @@ struct song_node * libraryFinder(struct song_node** library, int n){
 void shuffle(struct song_node ** library, int n){
   srand(time(NULL));
   int max = librarySize(library);
-  int count = 0; 
+  int count = 0;
   while (count < n && count < max){
     int rd_num = rand() % (max);
     printf("\n");
