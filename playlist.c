@@ -20,14 +20,17 @@ int createPlayList(){
   //since null is the end of the dirent list.
   while(entry = readdir( d )){
     char* name = entry->d_name;
-    char pathname[strlen(name)+sizeof(char)];
-    strcpy(pathname, PATH);
-    strcat(pathname, name);
+
     //char* pathname = "./sample-6s.mp3";
     if (name[strlen(name)-1] == '3' ){
         printf("gotcha: ");
         printf("filename: %s\n",name);
         //snag the file
+        char pathname[strlen(name)+sizeof(char)];
+        strcpy(pathname, PATH);
+        strcat(pathname, "/");
+        strcat(pathname, name);
+        printf("Path for stat:%s\n", pathname);
          struct stat * stat_buffer;
          stat_buffer = malloc(sizeof(struct stat)*1);
          stat(pathname, stat_buffer);//or use &s_buff
