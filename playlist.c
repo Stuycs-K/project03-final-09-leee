@@ -3,6 +3,8 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <sys/stat.h>
 int createPlayList(){
     struct song_node ** library = init();
 //go through the mp3 files and add them to library
@@ -21,10 +23,14 @@ int createPlayList(){
     if (name[strlen(name)-1] == '3' ){
         printf("gotcha: ");
         printf("filename: %s\n",name);
+        //snag the file
+         struct stat * stat_buffer;
+         stat_buffer = malloc(sizeof(struct stat)*1);
+         stat(PATH, stat_buffer);//or use &s_buff
+         printf("size: %ld \n", stat_buffer->st_size);
+         printf("mode : %o \n", stat_buffer->st_mode);
+        //free(stat_buffer);
     }
-    
-    //printf("--type: %d\n",entry->d_type);
-    //You can use the PATH + filename to get stat data!
   }
   closedir(d);
     print_library(library);

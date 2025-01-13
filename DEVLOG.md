@@ -2,7 +2,7 @@
 
 This document must be updated daily by EACH group member.
 
-## Player 1
+## Ethan Lee
 
 ### 2024-01-06 - Brief description
 Completed proposal.md and started the readme; Created files and makefile. ~45 min
