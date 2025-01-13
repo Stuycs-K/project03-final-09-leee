@@ -5,12 +5,13 @@
 #include "library.h"
 #include <ctype.h>
 #include  <unistd.h>
-
+#include <sys/types.h>
+#include <sys/wait.h>
 int main(){
     // createPlayList();
     // printf("UI:");
     // //fork and execvp
-    char *filePath = NULL;
+    char *filePath = "./sample-6s.mp3";
     char *const args[] = {"mpg123",(char *)filePath,NULL};
 
     pid_t pid = fork();
