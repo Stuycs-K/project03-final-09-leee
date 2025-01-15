@@ -8,14 +8,14 @@
 int compare(struct song_node * a, struct song_node * b){
   char s1[100];
   char s2[100];
-  strcpy(s1, a->artist);
-  strcpy(s2, b->artist);
-  for(int i = 0; i < strlen(a->artist); i++){
+  strcpy(s1, a->filename);
+  strcpy(s2, b->filename);
+  for(int i = 0; i < strlen(a->filename); i++){
     if(s1[i] > 96 && s1[i] < 123){
       s1[i] = s1[i] - 32;
     }
   }
-  for(int i = 0; i < strlen(b->artist); i++){
+  for(int i = 0; i < strlen(b->filename); i++){
     if(s2[i] > 96 && s2[i] < 123){
       s2[i] = s2[i] - 32;
     }
@@ -40,10 +40,10 @@ int compare(struct song_node * a, struct song_node * b){
   return strcmp(s1, s2);
 }
 
-struct song_node * insert_song_node(char* artist, char* title, struct song_node *first, int file){
+struct song_node * insert_song_node(char* filename, char* title, struct song_node *first, int file){
   struct song_node *song;
   song = malloc(sizeof(struct song_node)*1);
-  strcpy(song->artist, artist);
+  strcpy(song->filename, filename);
   strcpy(song->title, title);
   if(first == NULL){
     song->next = NULL;
@@ -77,12 +77,12 @@ struct song_node * insert_song_node(char* artist, char* title, struct song_node 
   return first;
 }
 
-struct song_node * find_artist_song(char* artist, char* title, struct song_node *first){
+struct song_node * find_filename_song(char* filename, char* title, struct song_node *first){
   if(first == NULL){
     return NULL;
   }
   while(first->next != NULL){
-    if(strcmp(first->artist, artist) == 0){
+    if(strcmp(first->filename, filename) == 0){
       if(strcmp(first->title, title) == 0){
         return first;
       } else {
@@ -92,7 +92,7 @@ struct song_node * find_artist_song(char* artist, char* title, struct song_node 
       first = first->next;
     }
   }
-  if(strcmp(first->artist, artist) == 0){
+  if(strcmp(first->filename, filename) == 0){
     if(strcmp(first->title, title) == 0){
       return first;
     }
@@ -100,11 +100,11 @@ struct song_node * find_artist_song(char* artist, char* title, struct song_node 
   return NULL;
 }
 
-struct song_node * first_artist_song(char* artist, struct song_node *first){
+struct song_node * first_filename_song(char* filename, struct song_node *first){
   if(first == NULL){
     return NULL;
   }
-  while(strcmp(artist, first->artist) != 0){
+  while(strcmp(filename, first->filename) != 0){
     first = first->next;
     if(first == NULL){
       return NULL;
@@ -113,14 +113,14 @@ struct song_node * first_artist_song(char* artist, struct song_node *first){
   return first;
 }
 
-struct song_node * remove_song_node(char* artist, char* title, struct song_node *first){
+struct song_node * remove_song_node(char* filename, char* title, struct song_node *first){
   struct song_node * temp;
   struct song_node * begin;
   char flag = 0;
   temp = first;
   begin = first;
   while(first->next != NULL){
-    if(strcmp(temp->artist, artist) == 0){
+    if(strcmp(temp->filename, filename) == 0){
       if(strcmp(temp->title, title) == 0){
         first->next = temp->next;
         struct song_node * helper;
@@ -157,7 +157,7 @@ struct song_node * free_list(struct song_node * first){
 
 void helper_print(struct song_node *start){
   if (start!= NULL){
-    printf("{%s, %s}", start->artist, start->title);
+    printf("{%s, %s}", start->filename, start->title);
     if (start->next != NULL){
       printf("|");
     } else{printf("]");}
@@ -166,7 +166,7 @@ void helper_print(struct song_node *start){
 }
 void print_song_list(struct song_node *start){
   if (start != NULL){
-    char* letter = start->artist;
+    char* letter = start->filename;
     printf("%c: ", letter[0]);
     printf("[");
     helper_print(start);

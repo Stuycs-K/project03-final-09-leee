@@ -5,6 +5,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <ctype.h>
+#include  <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 int createPlayList(){
     struct song_node ** library = init();
 //go through the mp3 files and add them to library
@@ -42,6 +46,7 @@ int createPlayList(){
               perror("Error getting file descriptor");  
           } else {  
               printf("File descriptor: %d\n", fd);  
+              add(library, "filename", "title", fd);
           }  
         
           fclose(file);  
@@ -55,8 +60,44 @@ int createPlayList(){
         // free(stat_buffer);
     }
   }
-  closedir(d);
-    print_library(library);
-    return 0;
-}
+    closedir(d);
+      print_library(library);
+      return 0;
+  }
+
+  int play(struct song_node* start){
+    while (start!= NULL){
+        char *name = start->filename;
+        char *PATH = ".";
+        char pathname[strlen(name)+sizeof(char)];
+            strcpy(pathname, PATH);
+            strcat(pathname, "/");
+            strcat(pathname, name);
+
+            
+        //char *filePath = "./sample-6s.mp3";
+        char *const args[] = {"mpg123",(char *)pathname,NULL};
+
+        pid_t pid = fork();
+
+        if (pid == -1) {//fail
+            perror("fork failed");
+            exit(EXIT_FAILURE);
+        } else if (pid == 0) {
+            // Child process (executes mpg123)
+            if (execvp("mpg123", args) == -1) {
+                // If execvp fails
+                perror("execvp failed");
+                exit(EXIT_FAILURE);
+            }
+        } else {
+            printf("Playing the song...\n");
+            wait(NULL);
+            printf("Finished playing the song.\n");
+        }
+    play(start->next);
+    }
+        
+  }
+
 

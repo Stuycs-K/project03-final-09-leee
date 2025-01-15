@@ -14,36 +14,36 @@ struct song_node ** init(){
   return library;
 }
 
-void add(struct song_node ** library, char* artist, char* title, int file){
-  char letter = artist[0];
+void add(struct song_node ** library, char* filename, char* title, int file){
+  char letter = filename[0];
   if(letter > 96 && letter < 123){
-    library[letter - 'a' + 1] = insert_song_node(artist, title, library[letter - 'a' + 1], file);
+    library[letter - 'a' + 1] = insert_song_node(filename, title, library[letter - 'a' + 1], file);
   } else if(letter > 64 && letter < 91){
-    library[letter - 'A' + 1] = insert_song_node(artist, title, library[letter - 'A' + 1], file);
+    library[letter - 'A' + 1] = insert_song_node(filename, title, library[letter - 'A' + 1], file);
   } else {
-    library[0] = insert_song_node(artist, title, library[0], file);
+    library[0] = insert_song_node(filename, title, library[0], file);
   }
 }
 
-struct song_node * search_song(struct song_node ** library, char* artist, char* title){
-  char letter = artist[0];
+struct song_node * search_song(struct song_node ** library, char* filename, char* title){
+  char letter = filename[0];
   if(letter > 96 && letter < 123){
-    return find_artist_song(artist, title, library[letter - 'a' + 1]);
+    return find_filename_song(filename, title, library[letter - 'a' + 1]);
   } else if(letter > 64 && letter < 91){
-    return find_artist_song(artist, title, library[letter - 'A' + 1]);
+    return find_filename_song(filename, title, library[letter - 'A' + 1]);
   } else {
-    return find_artist_song(artist, title, library[0]);
+    return find_filename_song(filename, title, library[0]);
   }
 }
 
-struct song_node * search_artist(struct song_node ** library, char* artist){
-  char letter = artist[0];
+struct song_node * search_filename(struct song_node ** library, char* filename){
+  char letter = filename[0];
   if(letter > 96 && letter < 123){
-    return first_artist_song(artist, library[letter - 'a' + 1]);
+    return first_filename_song(filename, library[letter - 'a' + 1]);
   } else if(letter > 64 && letter < 91){
-    return first_artist_song(artist, library[letter - 'A' + 1]);
+    return first_filename_song(filename, library[letter - 'A' + 1]);
   } else {
-    return first_artist_song(artist, library[0]);
+    return first_filename_song(filename, library[0]);
   }
 }
 
@@ -63,19 +63,19 @@ void print_library(struct song_node ** library){
   }
 }
 
-void print_artist(struct song_node ** library, char* artist){
-  struct song_node * first = search_artist(library, artist);
+void print_filename(struct song_node ** library, char* filename){
+  struct song_node * first = search_filename(library, filename);
   if (first == NULL){
-    printf("artist not found");
+    printf("filename not found");
   }else{
-    printf("artist found![");
+    printf("filename found![");
     int i = 0;
     while (first != NULL){
       if (i != 0){
         printf("|");
       }
-      if(strcmp(first->artist, artist) == 0){
-        printf("{%s, %s}", first-> title, first-> artist);
+      if(strcmp(first->filename, filename) == 0){
+        printf("{%s, %s}", first-> title, first-> filename);
         i++;
       }
       first = first-> next;
@@ -84,25 +84,25 @@ void print_artist(struct song_node ** library, char* artist){
   }
 }
 
-int delete_song(struct song_node ** library, char* artist, char* title){
-  char letter = artist[0];
+int delete_song(struct song_node ** library, char* filename, char* title){
+  char letter = filename[0];
   if(letter > 96 && letter < 123){
-    if(search_song(library, artist, title) != NULL){
-      remove_song_node(artist, title, library[letter - 'a' + 1]);
+    if(search_song(library, filename, title) != NULL){
+      remove_song_node(filename, title, library[letter - 'a' + 1]);
       return 0;
     } else {
       return 1;
     }
   } else if(letter > 64 && letter < 91){
-    if(search_song(library, artist, title) != NULL){
-      remove_song_node(artist, title, library[letter - 'A' + 1]);
+    if(search_song(library, filename, title) != NULL){
+      remove_song_node(filename, title, library[letter - 'A' + 1]);
       return 0;
     } else {
       return 1;
     }
   } else {
-    if(search_song(library, artist, title) != NULL){
-      remove_song_node(artist, title, library[0]);
+    if(search_song(library, filename, title) != NULL){
+      remove_song_node(filename, title, library[0]);
     } else {
       return 1;
     }
@@ -147,7 +147,7 @@ void shuffle(struct song_node ** library, int n){
     printf("\n");
     if (libraryFinder(library, rd_num) != NULL){
       struct song_node* hold = libraryFinder(library, rd_num);
-      printf("{%s, %s}",hold->artist,hold->title);
+      printf("{%s, %s}",hold->filename,hold->title);
     } else(printf("%d", rd_num));
     count++;
   }
