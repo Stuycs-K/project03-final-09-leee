@@ -31,15 +31,32 @@ int createPlayList(){
         strcat(pathname, "/");
         strcat(pathname, name);
         printf("Path for stat:%s\n", pathname);
-         struct stat * stat_buffer;
-         stat_buffer = malloc(sizeof(struct stat)*1);
-         stat(pathname, stat_buffer);//or use &s_buff
-         printf("size: %ld \n", stat_buffer->st_size);
-         printf("mode : %o \n", stat_buffer->st_mode);
-        free(stat_buffer);
+          FILE *file = fopen(name, "r");  
+          if (file == NULL) {  
+              perror("Error opening file");  
+              return 1;  
+          }  
+        
+          int fd = fileno(file);  
+          if (fd == -1) {  
+              perror("Error getting file descriptor");  
+          } else {  
+              printf("File descriptor: %d\n", fd);  
+          }  
+        
+          fclose(file);  
+
+        
+        //  struct stat * stat_buffer;
+        //  stat_buffer = malloc(sizeof(struct stat)*1);
+        //  stat(pathname, stat_buffer);//or use &s_buff
+        //  printf("size: %ld \n", stat_buffer->st_size);
+        //  printf("mode : %o \n", stat_buffer->st_mode);
+        // free(stat_buffer);
     }
   }
   closedir(d);
     print_library(library);
     return 0;
 }
+

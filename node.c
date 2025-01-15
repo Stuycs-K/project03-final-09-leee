@@ -200,3 +200,7 @@ struct song_node * randSong(struct song_node* start){
   return findNth(start, rd_num, 0);
   //find random int within truesize(start, 1)
 }
+
+int set_int(struct song_node* num){
+  return 0;
+}
