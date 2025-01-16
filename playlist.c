@@ -9,11 +9,15 @@
 #include  <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-int createPlayList(){
-    struct song_node * library = malloc(sizeof(struct song_node*));
+struct song_node ** createPlayList(){
+  struct song_node ** library = init();
+  return library;
+}
+int setupPlayList(struct song_node ** library){
+  //struct song_node * library = malloc(sizeof(struct song_node*));
 //go through the mp3 files and add them to library
 //num needs to be the number of the mp3file; also when u add it will auto sort so you cant just keep track of it in one place
-//also that value int file does nothing as of right now, there is no purpose yet. 
+//also that value int file does nothing as of right now, there is no purpose yet.
 //DIRENT
   DIR * d;
   char* PATH = ".";
@@ -35,28 +39,30 @@ int createPlayList(){
         strcat(pathname, "/");
         strcat(pathname, name);
         printf("Path for stat:%s\n", pathname);
-          FILE *file = fopen(name, "r");  
-          if (file == NULL) {  
-              perror("Error opening file");  
-              return 1;  
-          }  
-        
-          int fd = fileno(file);  
-          if (fd == -1) {  
-              perror("Error getting file descriptor");  
-          } else {  
-              printf("File descriptor: %d\n", fd);  
-              //insert_song_node("filename", "title", library->next,fd);
-          }  
-        
-          fclose(file);  
-    }
+          FILE *file = fopen(name, "r");
+          if (file == NULL) {
+              perror("Error opening file");
+              return 1;
+          }
 
-  }
+          int fd = fileno(file);
+          if (fd == -1) {
+              perror("Error getting file descriptor");
+          } else {
+              printf("File descriptor: %d\n", fd);
+              add(library, name, "title",fd);
+          }
+
+
+        }
+
+      }
+      //files are all opened right now
     closedir(d);
-      //print_song_list(library);
-      return 0;
-  }
+
+    print_library(library);
+    return 0;
+}
 
   int play(struct song_node* start){
     while (start!= NULL){
@@ -67,7 +73,7 @@ int createPlayList(){
             strcat(pathname, "/");
             strcat(pathname, name);
 
-            
+
         //char *filePath = "./sample-6s.mp3";
         char *const args[] = {"mpg123",(char *)pathname,NULL};
 
@@ -90,7 +96,5 @@ int createPlayList(){
         }
     play(start->next);
     }
-        
+
   }
-
-

@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 int main(){
     struct song_node ** library = createPlayList();
+    setupPlayList(library);
     //play(library->start);
   return 0;
 }
