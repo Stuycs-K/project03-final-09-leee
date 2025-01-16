@@ -19,6 +19,8 @@ Created new parameter for struct song_node for int file ~45 min
 Worked on execvping a single mp3 file ~1 hr
 ### 2024-01-13 - Brief description
 Finished execvp test for one mp3 file; downloaded mpg123; created test and started createPlayList ~Three free periods
-Also created playlist and detects mp3 files and grabs metadata like size and mode using path and name; ~ One class period + 30 min 
+Also created playlist and detects mp3 files and grabs metadata like size and mode using path and name; ~ One class period + 30 min
 ### 2024-01-15 - Brief description
 Wrote play and altered create playlist; changing from library to song_node Might not be permenant ; ~2 periods
+### 2024-01-16 - Brief description
+added setupPlayList, mini_Print, and selectfile function/methods ~one class period
