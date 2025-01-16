@@ -158,7 +158,7 @@ void mini_print(struct song_node *start){
   if (start!= NULL){
     printf("{%s, %s}", start->filename, start->title);
     if (start->next != NULL){
-      printf("|");
+
     } else{printf("]");}
 }
 }

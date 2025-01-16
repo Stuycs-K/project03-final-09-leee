@@ -66,7 +66,7 @@ int setupPlayList(struct song_node ** library){
 
 struct song_node* selectFile(struct song_node** library, int fdnum){
     struct song_node* found = libraryFinder(library, fdnum);
-    // mini_print(found);
+    //mini_print(found);
     return found;
   }
 
