@@ -154,7 +154,14 @@ struct song_node * free_list(struct song_node * first){
 	}
 	return first;
 }
-
+void mini_print(struct song_node *start){
+  if (start!= NULL){
+    printf("{%s, %s}", start->filename, start->title);
+    if (start->next != NULL){
+      printf("|");
+    } else{printf("]");}
+}
+}
 void helper_print(struct song_node *start){
   if (start!= NULL){
     printf("{%s, %s}", start->filename, start->title);

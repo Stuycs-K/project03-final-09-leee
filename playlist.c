@@ -64,6 +64,15 @@ int setupPlayList(struct song_node ** library){
     return 0;
 }
 
+struct song_node* selectFile(struct song_node** library, int fdnum){
+    struct song_node* found = libraryFinder(library, fdnum);
+    // mini_print(found);
+    return found;
+  }
+
+
+
+
   int play(struct song_node* start){
     while (start!= NULL){
         char *name = start->filename;

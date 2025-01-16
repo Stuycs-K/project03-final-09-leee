@@ -11,6 +11,8 @@
 int main(){
     struct song_node ** library = createPlayList();
     setupPlayList(library);
-    //play(library->start);
+    struct song_node* first = selectFile(library, 4);
+    printf("\n");
+    mini_print(first);
   return 0;
 }

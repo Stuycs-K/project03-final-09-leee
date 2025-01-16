@@ -15,4 +15,5 @@ int truesize(struct song_node* start);
 struct song_node * randSong(struct song_node* start);
 struct song_node * findNth(struct song_node* start, int n, int current);
 // struct song_node * delete(char* filename, char* title, struct song_node* start);
+void mini_print(struct song_node *start);
 #endif
