@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 int main(){
-    createPlayList();
-    play();
+    struct song_node ** library = createPlayList();
+    //play(library->start);
   return 0;
 }

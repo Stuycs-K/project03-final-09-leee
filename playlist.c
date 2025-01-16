@@ -10,7 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 int createPlayList(){
-    struct song_node ** library = init();
+    struct song_node * library = malloc(sizeof(struct song_node*));
 //go through the mp3 files and add them to library
 //num needs to be the number of the mp3file; also when u add it will auto sort so you cant just keep track of it in one place
 //also that value int file does nothing as of right now, there is no purpose yet. 
@@ -46,22 +46,15 @@ int createPlayList(){
               perror("Error getting file descriptor");  
           } else {  
               printf("File descriptor: %d\n", fd);  
-              add(library, "filename", "title", fd);
+              //insert_song_node("filename", "title", library->next,fd);
           }  
         
           fclose(file);  
-
-        
-        //  struct stat * stat_buffer;
-        //  stat_buffer = malloc(sizeof(struct stat)*1);
-        //  stat(pathname, stat_buffer);//or use &s_buff
-        //  printf("size: %ld \n", stat_buffer->st_size);
-        //  printf("mode : %o \n", stat_buffer->st_mode);
-        // free(stat_buffer);
     }
+
   }
     closedir(d);
-      print_library(library);
+      //print_song_list(library);
       return 0;
   }
 
