@@ -11,9 +11,10 @@
 int main(){
     struct song_node ** library = createPlayList();
     setupPlayList(library);
-    struct song_node* first = selectFile(library, 0);
-    printf("\nfirstval:");
-    mini_print(first);
-    printf("\n");
+    // struct song_node* first = selectFile(library, 0);
+    // printf("\nfirstval:");
+    // mini_print(first);
+    // printf("\n");
+    finalPlay(library);
   return 0;
 }

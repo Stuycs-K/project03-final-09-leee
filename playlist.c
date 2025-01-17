@@ -1,5 +1,6 @@
 #include "node.h"
 #include "library.h"
+#include "playlist.h"
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
@@ -65,16 +66,30 @@ int setupPlayList(struct song_node ** library){
 }
 
 struct song_node* selectFile(struct song_node** library, int fdnum){
-    struct song_node* found = libraryFinder(library, fdnum);
-    //mini_print(found);
+  struct song_node* found;
+  if (libraryFinder(library, fdnum)!= NULL){
+    found = libraryFinder(library, fdnum);
     return found;
+  } else{return NULL;}
+    //mini_print(found);
   }
 
-
-
+int finalPlay(struct song_node** library){
+  int num = 0;
+  //while (num == 0){
+  while (selectFile(library, num) != NULL){
+    struct song_node* first = selectFile(library, num);
+    printf("\nfirstval:");
+    mini_print(first);
+    printf("\n");
+    play(selectFile(library,num));
+    printf("\n\n\n");
+    num++;
+  }
+}
 
   int play(struct song_node* start){
-    while (start!= NULL){
+    if (start!= NULL){
         char *name = start->filename;
         char *PATH = ".";
         char pathname[strlen(name)+sizeof(char)];
@@ -103,7 +118,7 @@ struct song_node* selectFile(struct song_node** library, int fdnum){
             wait(NULL);
             printf("Finished playing the song.\n");
         }
-    play(start->next);
+    //play(start->next);
     }
 
   }
