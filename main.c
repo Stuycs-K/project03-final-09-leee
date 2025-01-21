@@ -8,6 +8,13 @@
 #include  <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
+
+static void sighandler(int signo){
+if ( signo == SIGINT ){
+  printf("Who you talkin to?\n");
+}
+}
 int main(){
     struct song_node ** library = createPlayList();
     setupPlayList(library);
@@ -15,6 +22,7 @@ int main(){
     // printf("\nfirstval:");
     // mini_print(first);
     // printf("\n");
+    signal(SIGINT, sighandler);
     finalPlay(library);
   return 0;
 }

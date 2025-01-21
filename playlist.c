@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include  <unistd.h>
 #include <sys/types.h>
+#include <signal.h>
 #include <sys/wait.h>
 struct song_node ** createPlayList(){
   struct song_node ** library = init();
@@ -120,5 +121,11 @@ int finalPlay(struct song_node** library){
         }
     //play(start->next);
     }
-
   }
+    
+    static void sighandler(int signo){
+    if ( signo == SIGINT ){
+      printf("Who you talkin to?\n");
+    }
+    }
+
