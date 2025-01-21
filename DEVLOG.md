@@ -25,4 +25,4 @@ Wrote play and altered create playlist; changing from library to song_node Might
 ### 2024-01-16 - Brief description
 added setupPlayList, mini_Print, and selectfile function/methods ~one class period
 ### 2024-01-21 - Brief description
-Added SIGINT handlder; new menu; pause 2+ hours
+Added SIGINT handlder; new menu; pause 2+ hours; Video +1.5 hours due to technical difficulties on my end
