@@ -33,14 +33,14 @@ int setupPlayList(struct song_node ** library){
 
     //char* pathname = "./sample-6s.mp3";
     if (name[strlen(name)-1] == '3' ){
-        printf("gotcha: ");
-        printf("filename: %s\n",name);
+        //printf("gotcha: ");
+        //printf("filename: %s\n",name);
         //snag the file
         char pathname[strlen(name)+sizeof(char)];
         strcpy(pathname, PATH);
         strcat(pathname, "/");
         strcat(pathname, name);
-        printf("Path for stat:%s\n", pathname);
+   //     printf("Path for stat:%s\n", pathname);
           FILE *file = fopen(name, "r");
           if (file == NULL) {
               perror("Error opening file");
@@ -51,7 +51,7 @@ int setupPlayList(struct song_node ** library){
           if (fd == -1) {
               perror("Error getting file descriptor");
           } else {
-              printf("File descriptor: %d\n", fd);
+   //           printf("File descriptor: %d\n", fd);
               add(library, name, "title",fd);
           }
 
@@ -75,19 +75,19 @@ struct song_node* selectFile(struct song_node** library, int fdnum){
     //mini_print(found);
   }
 
-int finalPlay(struct song_node** library){
-  int num = 0;
-  //while (num == 0){
-  while (selectFile(library, num) != NULL){
-    struct song_node* first = selectFile(library, num);
-    printf("\nfirstval:");
-    mini_print(first);
-    printf("\n");
-    play(selectFile(library,num));
-    printf("\n\n\n");
-    num++;
-  }
-}
+// int finalPlay(struct song_node** library){
+//   int num = 0;
+//   //while (num == 0){
+//   while (selectFile(library, num) != NULL){
+//     struct song_node* first = selectFile(library, num);
+//     printf("\nMP3 File:");
+//     mini_print(first);
+//     printf("\n");
+//     play(selectFile(library,num));
+//     printf("\n\n\n");
+//     num++;
+//   }
+// }
 
   int play(struct song_node* start){
     if (start!= NULL){
@@ -122,6 +122,5 @@ int finalPlay(struct song_node** library){
     //play(start->next);
     }
   }
-    
 
 

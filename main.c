@@ -12,17 +12,35 @@
 
 static void sighandler(int signo){
 if ( signo == SIGINT ){
-  printf("Who you talkin to?\n");
+  struct song_node ** library = createPlayList();
+  printf("RESETING PLAYLIST\n");
+  setupPlayList(library);
+  printf("\nNEW PLAYLIST\n");
+  print_library(library);
+  printf("===========\n");
 }
 }
+
+
+int finalPlay(struct song_node** library){
+  int num = 0;
+  //while (num == 0){
+  while (selectFile(library, num) != NULL){
+    signal(SIGINT, sighandler);
+    struct song_node* first = selectFile(library, num);
+    printf("\nMP3 File:");
+    mini_print(first);
+    printf("\n");
+    play(selectFile(library,num));
+    printf("\n\n\n");
+    num++;
+  }
+}
+
+
 int main(){
     struct song_node ** library = createPlayList();
     setupPlayList(library);
-    // struct song_node* first = selectFile(library, 0);
-    // printf("\nfirstval:");
-    // mini_print(first);
-    // printf("\n");
-    signal(SIGINT, sighandler);
     finalPlay(library);
   return 0;
 }
