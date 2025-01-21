@@ -24,3 +24,5 @@ Also created playlist and detects mp3 files and grabs metadata like size and mod
 Wrote play and altered create playlist; changing from library to song_node Might not be permenant ; ~2 periods
 ### 2024-01-16 - Brief description
 added setupPlayList, mini_Print, and selectfile function/methods ~one class period
+### 2024-01-20 - Brief description
+Added SIGINT handlder; new menu; pause

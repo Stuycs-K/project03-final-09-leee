@@ -123,9 +123,5 @@ int finalPlay(struct song_node** library){
     }
   }
     
-    static void sighandler(int signo){
-    if ( signo == SIGINT ){
-      printf("Who you talkin to?\n");
-    }
-    }
+
 
